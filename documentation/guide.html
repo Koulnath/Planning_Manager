@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide du Développeur - Planning Manager G9</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #22d3ee;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-dim);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent);
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #000;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #d1d5db;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .role-card {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .role-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .role-card ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .role-card li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .role-card li::before {
+            content: "→";
+            color: var(--primary);
+        }
+
+        .step-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-pills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .pill {
+            padding: 8px 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .pill:hover,
+        .pill.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding-bottom: 40px;
+        }
+
+        .important {
+            border-left-color: var(--warning);
+        }
+
+        .success {
+            border-left-color: var(--success);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Planning Manager G9</h1>
+            <p class="subtitle">Guide d'excellence pour le développement et la collaboration</p>
+        </header>
+
+        <div class="nav-pills">
+            <a href="#arch" class="pill">Architecture</a>
+            <a href="#git" class="pill">Git Workflow</a>
+            <a href="#roles" class="pill">Rôles</a>
+            <a href="#code" class="pill">Standards</a>
+        </div>
+
+        <!-- Architecture Section -->
+        <section id="arch">
+            <h2>🛠️ Architecture MVC</h2>
+            <p>Pour coder "parfaitement", nous séparons les données de l'affichage. Pas de SQL dans l'interface !</p>
+            <div class="roles-grid">
+                <div class="role-card">
+                    <h3>Le Modèle (M)</h3>
+                    <p>Représente les données. Voir <code>com.g9.model.Planning</code>.</p>
+                </div>
+                <div class="role-card">
+                    <h3>La Vue (V)</h3>
+                    <p>L'interface Swing de Prisca. Voir <code>com.g9.view</code>.</p>
+                </div>
+                <div class="role-card">
+                    <h3>Le Contrôleur / Service (C)</h3>
+                    <p>Le cerveau. Gère les CRUD et les conflits. Voir <code>com.g9.service</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Git Workflow Section -->
+        <section id="git" class="important">
+            <h2>🌿 Règle d'Or : Git Workflow</h2>
+            <p>Ne codez <strong>jamais</strong> sur la branche <code>main</code>. Suivez ce cycle pour chaque tâche :
+            </p>
+            <div class="step-badge">Étape 1</div>
+            <pre><code>git checkout skjuv-conflits  # Ou votre branche dédiée
+git pull origin main          # Toujours synchroniser</code></pre>
+
+            <div class="step-badge">Étape 2</div>
+            <p>Codez votre fonctionnalité en local.</p>
+
+            <div class="step-badge">Étape 3</div>
+            <pre><code>git add .
+git commit -m "feat: ajout de la logique de [votre tâche]"
+git push origin [votre-branche]</code></pre>
+        </section>
+
+        <!-- Roles Specific Section -->
+        <section id="roles">
+            <h2>👥 Missions Spécifiques</h2>
+            <div class="roles-grid">
+                <div class="role-card">
+                    <h3>Coordination (Favor)</h3>
+                    <ul>
+                        <li>Lead Dev & Architecture.</li>
+                        <li>Validation finale & Merges.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>Admin BD (Frank Ryan)</h3>
+                    <ul>
+                        <li>Schéma UML/ERD.</li>
+                        <li>Scripts SQL & Performance.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>Backend CRUD (Juvenal)</h3>
+                    <ul>
+                        <li>Ajouter/Modifier/Supprimer.</li>
+                        <li>Liaison Service <-> DAO.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>Algorithme (Freddy)</h3>
+                    <ul>
+                        <li>Détection Conflits.</li>
+                        <li>Optimisation logique.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>UI/UX (Prisca)</h3>
+                    <ul>
+                        <li>Maquettes & Swing Frontend.</li>
+                        <li>Esthétique & Ergonomie.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>QA & Tests (Ryan)</h3>
+                    <ul>
+                        <li>Tests Unitaires & Bugs.</li>
+                        <li>Validation installation.</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <h3>Doc & Data (Borelle, Claude, Esther)</h3>
+                    <ul>
+                        <li>Rapport PDF, README.</li>
+                        <li>Jeux de données de test.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Standards Section -->
+        <section id="code" class="success">
+            <h2>✨ Standards de Code</h2>
+            <div class="highlight-box">
+                <p><strong>1. Nommage :</strong> Utilisez le <code>CamelCase</code> pour les classes et
+                    <code>camelCase</code> pour les méthodes.
+                </p>
+                <p><strong>2. Documentation :</strong> Chaque méthode doit avoir un commentaire Javadoc expliquant son
+                    but.</p>
+                <p><strong>3. Tests :</strong> Pas de code sans test. Les tests unitaires sont dans
+                    <code>src/test/java</code>.
+                </p>
+            </div>
+            <pre><code>/**
+ * Vérifie si deux cours sont en conflit.
+ */
+public static boolean hasConflict(Planning c1, Planning c2) {
+    // Votre génie ici...
+}</code></pre>
+        </section>
+
+        <footer>
+            <p>Propulsé par l'excellence du Groupe G9 - 2026</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>

@@ -37,7 +37,8 @@ Avant de commencer, assurez-vous d'avoir installé :
 - **Push** : Envoyez votre travail avec `git push origin votre-nom-tache`.
 
 ## 📖 Documentation Détaillée
-- [Guide Technique du Développeur](DEVELOPER_GUIDE.md) : Pour comprendre l'architecture et les normes de code.
+- [✨ Guide Fondamental du Groupe G9 (HTML)](documentation/guide.html) : **À lire absolument !** (Architecture, Rôles, Git).
+- [Guide Technique du Développeur](DEVELOPER_GUIDE.md) : Détails techniques profonds.
 - [Guide de Contribution](CONTRIBUTING.md) : Pour le travail en binôme.
 
 ## ✅ Tests
