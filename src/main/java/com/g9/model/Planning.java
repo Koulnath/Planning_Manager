@@ -1,24 +1,55 @@
 package com.g9.model;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+/**
+ * Modèle représentant un cours dans l'emploi du temps.
+ * Version unifiée incluant le support des jours et des heures précises
+ * (LocalTime).
+ */
 public class Planning {
     private int id;
     private String nomCours;
     private String enseignant;
     private String salle;
-    private int heureDebut; // Format HHMM (ex: 0800 pour 08h00)
-    private int heureFin;
+    private JourSemaine jour;
+    private LocalTime heureDebut;
+    private LocalTime heureFin;
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    // Constructeur par défaut
     public Planning() {
     }
 
-    public Planning(String nomCours, String enseignant, String salle, int heureDebut, int heureFin) {
+    // Constructeur complet
+    public Planning(int id, String nomCours, String enseignant, String salle, JourSemaine jour, String heureDebut,
+            String heureFin) {
+        this.id = id;
         this.nomCours = nomCours;
         this.enseignant = enseignant;
         this.salle = salle;
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
+        this.jour = jour;
+        setHeureDebut(heureDebut);
+        setHeureFin(heureFin);
+        validateTimes();
     }
 
+    // Version simplifiée pour les tests
+    public Planning(String nomCours, String enseignant, String salle, JourSemaine jour, String heureDebut,
+            String heureFin) {
+        this(0, nomCours, enseignant, salle, jour, heureDebut, heureFin);
+    }
+
+    private void validateTimes() {
+        if (heureDebut != null && heureFin != null && !heureFin.isAfter(heureDebut)) {
+            throw new IllegalArgumentException("L'heure de fin doit être après l'heure de début (" + nomCours + ")");
+        }
+    }
+
+    // Getters et Setters
     public int getId() {
         return id;
     }
@@ -51,30 +82,42 @@ public class Planning {
         this.salle = salle;
     }
 
-    public int getHeureDebut() {
+    public JourSemaine getJour() {
+        return jour;
+    }
+
+    public void setJour(JourSemaine jour) {
+        this.jour = jour;
+    }
+
+    public LocalTime getHeureDebut() {
         return heureDebut;
     }
 
-    public void setHeureDebut(int heureDebut) {
-        this.heureDebut = heureDebut;
+    public void setHeureDebut(String heureStr) {
+        try {
+            this.heureDebut = LocalTime.parse(heureStr, FORMATTER);
+        } catch (DateTimeParseException e) {
+            // Fallback pour format H:mm si nécessaire ou lever une exception claire
+            this.heureDebut = LocalTime.parse(heureStr);
+        }
     }
 
-    public int getHeureFin() {
+    public LocalTime getHeureFin() {
         return heureFin;
     }
 
-    public void setHeureFin(int heureFin) {
-        this.heureFin = heureFin;
+    public void setHeureFin(String heureStr) {
+        try {
+            this.heureFin = LocalTime.parse(heureStr, FORMATTER);
+        } catch (DateTimeParseException e) {
+            this.heureFin = LocalTime.parse(heureStr);
+        }
     }
 
     @Override
     public String toString() {
-        return "Planning{" +
-                "nomCours='" + nomCours + '\'' +
-                ", enseignant='" + enseignant + '\'' +
-                ", salle='" + salle + '\'' +
-                ", heureDebut=" + heureDebut +
-                ", heureFin=" + heureFin +
-                '}';
+        return String.format("[%d] %s - %s (%s) | %s %s - %s",
+                id, nomCours, enseignant, salle, jour, heureDebut, heureFin);
     }
 }

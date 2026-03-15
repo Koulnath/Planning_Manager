@@ -38,6 +38,7 @@ Avant de commencer, assurez-vous d'avoir installé :
 
 ## 📖 Documentation Détaillée
 - [✨ Guide Fondamental du Groupe G9 (HTML)](documentation/guide.html) : **À lire absolument !** (Architecture, Rôles, Git).
+- [🛠️ Guide d'Intégration Backend](INTEGRATION_GUIDE.md) : Pour Prisca (UI), Sokeng (DB) et Ryan (QA).
 - [Guide Technique du Développeur](DEVELOPER_GUIDE.md) : Détails techniques profonds.
 - [Guide de Contribution](CONTRIBUTING.md) : Pour le travail en binôme.
 
