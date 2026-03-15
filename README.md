@@ -36,6 +36,10 @@ Avant de commencer, assurez-vous d'avoir installé :
 - **Commit** : Faites des messages clairs.
 - **Push** : Envoyez votre travail avec `git push origin votre-nom-tache`.
 
+## 📖 Documentation Détaillée
+- [Guide Technique du Développeur](DEVELOPER_GUIDE.md) : Pour comprendre l'architecture et les normes de code.
+- [Guide de Contribution](CONTRIBUTING.md) : Pour le travail en binôme.
+
 ## ✅ Tests
 Pour vérifier que la logique de conflit fonctionne :
 ```bash
