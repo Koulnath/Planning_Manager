@@ -1,15 +1,15 @@
-# Guide de Contribution - Binôme Juvenal & Freddy
+# Guide de Contribution - Binôme Juvenal & Sandy
 
-Ce document définit la collaboration entre **SINENG KENGNI Juvenal** (skjuve) et **CHOUDJA TADZEWA Freddy**.
+Ce document définit la collaboration entre **Juvenal** et **Sandy** .
 
 ## 🛠️ Répartition des Rôles
-- **Juvenal (skjuve)** : Développement de la logique **CRUD** (Ajouter/Modifier/Supprimer un cours).
-- **Freddy** : Implémentation et optimisation de l'algorithme de **détection de conflits** (horaires/salles).
+- **Juvenal** : Développement de la logique **CRUD** (Ajouter/Modifier/Supprimer un cours).
+- **Sandy** : Implémentation et optimisation de l'algorithme de **détection de conflits** (horaires/salles).
 
 ## 🤝 Workflow de Binômage
 Pour éviter les conflits de code entre nous deux :
 
-1.  **Communication** : Avant de commencer une modification, valide avec skjuve pour éviter de travailler sur la même méthode.
+1.  **Communication** : Avant de commencer une modification, valide avec Juvenal pour éviter de travailler sur la même méthode.
 2.  **Branche Commune** : Nous travaillons sur `skjuv-conflits`.
 3.  **Sync** : Fais toujours un `git pull origin skjuv-conflits` avant de coder.
 
