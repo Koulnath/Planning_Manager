@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.g9.service.ConflictCheckerTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s - in com.g9.service.ConflictCheckerTest

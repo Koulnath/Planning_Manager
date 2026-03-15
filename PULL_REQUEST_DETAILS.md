@@ -16,7 +16,7 @@ Mise en place des fondations backend pour la gestion des emplois du temps et la 
     - Ajout du driver MySQL dans le `pom.xml`.
 5.  **Collaboration** :
     - `README.md` : Instructions d'installation.
-    - `CONTRIBUTING.md` : Guide pour le binômage avec Sandy.
+    - `CONTRIBUTING.md` : Guide pour le binômage avec Freddy.
 
 ## ✅ Résultats des Tests
 Tous les tests passent via `mvn test`.
@@ -26,4 +26,4 @@ Tous les tests passent via `mvn test`.
 ```
 
 ---
-*Soumis par skjuve le 15/03/2026.*
+*Soumis par SINENG KENGNI Juvenal le 15/03/2026.*

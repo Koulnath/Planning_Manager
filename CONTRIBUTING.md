@@ -1,11 +1,10 @@
-# Guide de Contribution - Binôme skjuve & Sandy
+# Guide de Contribution - Binôme Juvenal & Freddy
 
-Bienvenue Sandy ! Ce document définit comment nous allons travailler ensemble sur la partie **Backend & Logique de Conflit**.
+Ce document définit la collaboration entre **SINENG KENGNI Juvenal** (skjuve) et **CHOUDJA TADZEWA Freddy**.
 
-## 🛠️ Notre Stack
-- **Modèle** : `com.g9.model.Planning`
-- **Logic** : `com.g9.service.ConflictChecker`
-- **Tests** : `src/test/java/com/g9/service/ConflictCheckerTest.java`
+## 🛠️ Répartition des Rôles
+- **Juvenal (skjuve)** : Développement de la logique **CRUD** (Ajouter/Modifier/Supprimer un cours).
+- **Freddy** : Implémentation et optimisation de l'algorithme de **détection de conflits** (horaires/salles).
 
 ## 🤝 Workflow de Binômage
 Pour éviter les conflits de code entre nous deux :
