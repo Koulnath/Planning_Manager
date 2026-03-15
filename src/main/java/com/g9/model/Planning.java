@@ -1,123 +1,69 @@
 package com.g9.model;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-/**
- * Modèle représentant un cours dans l'emploi du temps.
- * Version unifiée incluant le support des jours et des heures précises
- * (LocalTime).
- */
 public class Planning {
-    private int id;
-    private String nomCours;
-    private String enseignant;
-    private String salle;
-    private JourSemaine jour;
-    private LocalTime heureDebut;
+    
+    // Attributs correspondants à la base de données
+    private int idPlanning;
+    private int idCours;
+    private int idSalle;
+    private int idEnseignant;
+    private String jourSemaine;
+    private LocalTime heureDebut; // Utilisation de LocalTime pour gérer "08:00" facilement
     private LocalTime heureFin;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
-
-    // Constructeur par défaut
+    // Constructeur vide (souvent nécessaire pour JDBC)
     public Planning() {
     }
 
-    // Constructeur complet
-    public Planning(int id, String nomCours, String enseignant, String salle, JourSemaine jour, String heureDebut,
-            String heureFin) {
-        this.id = id;
-        this.nomCours = nomCours;
-        this.enseignant = enseignant;
-        this.salle = salle;
-        this.jour = jour;
-        setHeureDebut(heureDebut);
-        setHeureFin(heureFin);
-        validateTimes();
+    // Constructeur complet (pour la lecture depuis la BD)
+    public Planning(int idPlanning, int idCours, int idSalle, int idEnseignant, String jourSemaine, LocalTime heureDebut, LocalTime heureFin) {
+        this.idPlanning = idPlanning;
+        this.idCours = idCours;
+        this.idSalle = idSalle;
+        this.idEnseignant = idEnseignant;
+        this.jourSemaine = jourSemaine;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
     }
 
-    // Version simplifiée pour les tests
-    public Planning(String nomCours, String enseignant, String salle, JourSemaine jour, String heureDebut,
-            String heureFin) {
-        this(0, nomCours, enseignant, salle, jour, heureDebut, heureFin);
+    // Constructeur sans ID (pour l'insertion dans la BD depuis l'interface)
+    public Planning(int idCours, int idSalle, int idEnseignant, String jourSemaine, LocalTime heureDebut, LocalTime heureFin) {
+        this.idCours = idCours;
+        this.idSalle = idSalle;
+        this.idEnseignant = idEnseignant;
+        this.jourSemaine = jourSemaine;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
     }
 
-    private void validateTimes() {
-        if (heureDebut != null && heureFin != null && !heureFin.isAfter(heureDebut)) {
-            throw new IllegalArgumentException("L'heure de fin doit être après l'heure de début (" + nomCours + ")");
-        }
-    }
+    // --- GETTERS ET SETTERS ---
 
-    // Getters et Setters
-    public int getId() {
-        return id;
-    }
+    public int getIdPlanning() { return idPlanning; }
+    public void setIdPlanning(int idPlanning) { this.idPlanning = idPlanning; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getIdCours() { return idCours; }
+    public void setIdCours(int idCours) { this.idCours = idCours; }
 
-    public String getNomCours() {
-        return nomCours;
-    }
+    public int getIdSalle() { return idSalle; }
+    public void setIdSalle(int idSalle) { this.idSalle = idSalle; }
 
-    public void setNomCours(String nomCours) {
-        this.nomCours = nomCours;
-    }
+    public int getIdEnseignant() { return idEnseignant; }
+    public void setIdEnseignant(int idEnseignant) { this.idEnseignant = idEnseignant; }
 
-    public String getEnseignant() {
-        return enseignant;
-    }
+    public String getJourSemaine() { return jourSemaine; }
+    public void setJourSemaine(String jourSemaine) { this.jourSemaine = jourSemaine; }
 
-    public void setEnseignant(String enseignant) {
-        this.enseignant = enseignant;
-    }
+    public LocalTime getHeureDebut() { return heureDebut; }
+    public void setHeureDebut(LocalTime heureDebut) { this.heureDebut = heureDebut; }
 
-    public String getSalle() {
-        return salle;
-    }
+    public LocalTime getHeureFin() { return heureFin; }
+    public void setHeureFin(LocalTime heureFin) { this.heureFin = heureFin; }
 
-    public void setSalle(String salle) {
-        this.salle = salle;
-    }
-
-    public JourSemaine getJour() {
-        return jour;
-    }
-
-    public void setJour(JourSemaine jour) {
-        this.jour = jour;
-    }
-
-    public LocalTime getHeureDebut() {
-        return heureDebut;
-    }
-
-    public void setHeureDebut(String heureStr) {
-        try {
-            this.heureDebut = LocalTime.parse(heureStr, FORMATTER);
-        } catch (DateTimeParseException e) {
-            // Fallback pour format H:mm si nécessaire ou lever une exception claire
-            this.heureDebut = LocalTime.parse(heureStr);
-        }
-    }
-
-    public LocalTime getHeureFin() {
-        return heureFin;
-    }
-
-    public void setHeureFin(String heureStr) {
-        try {
-            this.heureFin = LocalTime.parse(heureStr, FORMATTER);
-        } catch (DateTimeParseException e) {
-            this.heureFin = LocalTime.parse(heureStr);
-        }
-    }
-
+    // Pour faciliter l'affichage des tests dans la console
     @Override
     public String toString() {
-        return String.format("[%d] %s - %s (%s) | %s %s - %s",
-                id, nomCours, enseignant, salle, jour, heureDebut, heureFin);
+        return "Planning [" + jourSemaine + " de " + heureDebut + " à " + heureFin + " - Salle ID: " + idSalle + "]";
     }
 }

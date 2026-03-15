@@ -4,30 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Singleton gérant la connexion à la base de données MySQL.
- * Travail à finaliser par Sokeng.
- */
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/tp207";
+    // Remplacer "root" et "" par les identifiants XAMPP/MySQL locaux si différent
+    private static final String URL = "jdbc:mysql://localhost:3306/planning_g9?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // À configurer
+    private static final String PASSWORD = ""; 
 
-    private static Connection connection = null;
-
-    private DatabaseConnection() {
-    }
-
-    public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("✅ Connexion à la base de données réussie.");
-            } catch (ClassNotFoundException e) {
-                System.err.println("❌ Pilote MySQL non trouvé.");
-                throw new SQLException(e);
-            }
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            // Charger le driver MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connexion à la base de données réussie !");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Erreur : Driver JDBC introuvable.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Erreur : Impossible de se connecter à la base de données.");
+            e.printStackTrace();
         }
         return connection;
     }
