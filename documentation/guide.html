@@ -377,6 +377,32 @@ git push origin ma-tache-specifique</code></pre>
             </div>
         </section>
 
+        <!-- DAO Section -->
+        <section id="dao">
+            <h2>🗄️ Persistance des Données (DAO)</h2>
+            <div class="card">
+                <p>Pour Sokeng et Juvenal : Le système est prêt pour MySQL. Voici comment ça marche :</p>
+                <div class="roles-grid">
+                    <div class="role-section" style="border-top-color: var(--accent)">
+                        <h3>1. Le Singleton Connexion</h3>
+                        <p>Le fichier <code>com.g9.dao.DatabaseConnection</code> centralise la connexion. Sokeng doit y
+                            mettre le bon mot de passe.</p>
+                    </div>
+                    <div class="role-section" style="border-top-color: var(--success)">
+                        <h3>2. Le Pattern DAO</h3>
+                        <p>On n'écrit jamais de SQL dans les services. On utilise <code>CourseDAO.java</code>.
+                            L'implémentation actuelle <code>CourseDAOImpl</code> est en mémoire, et doit être passée en
+                            JDBC.</p>
+                    </div>
+                </div>
+                <div class="highlight-box"
+                    style="background: rgba(16, 185, 129, 0.1); padding: 20px; border-radius: 15px; border: 1px solid var(--success); margin-top: 20px;">
+                    <p>✅ <strong>Service CRUD prêt :</strong> Juvenal, ton <code>CourseService</code> est déjà branché
+                        sur le DAO. Une fois que Sokeng finit le JDBC, tout marchera magiquement !</p>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>Document Technique Officiel - Groupe G9 - Master de Projet TP207</p>
         </footer>
