@@ -4,22 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Guide - Planning Manager G9</title>
+    <title>Encyclopédie du Développeur - Planning Manager G9</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
-            --primary-light: #818cf8;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
+            --primary-dark: #4338ca;
+            --bg: #0b0f1a;
+            --card-bg: #161b2c;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f1f5f9;
             --text-dim: #94a3b8;
             --accent: #22d3ee;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * {
@@ -33,196 +35,248 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
-        /* Header & Nav */
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            animation: fadeIn 1s ease;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: var(--text-dim);
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-
+        /* Navigation */
         nav {
             position: sticky;
             top: 0;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(11, 15, 26, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-brand {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .nav-links a {
             color: var(--text-dim);
             text-decoration: none;
             font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 20px;
+            font-weight: 500;
             transition: 0.3s;
-            border: 1px solid transparent;
         }
 
         .nav-links a:hover {
             color: var(--accent);
-            background: rgba(34, 211, 238, 0.1);
-            border-color: var(--accent);
         }
 
-        /* Sections */
+        /* Header */
+        header {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 30%, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-desc {
+            color: var(--text-dim);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section Styling */
         section {
-            padding: 80px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 100px 0;
+        }
+
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            display: block;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: var(--accent);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Architecture Visual */
+        .arch-box {
+            border-left: 4px solid var(--primary);
+            background: var(--glass);
             padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 30px;
+            border-radius: 0 20px 20px 0;
+            margin-bottom: 20px;
         }
 
-        /* Roles Grid */
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        .arch-title {
+            display: block;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
         }
 
-        .role-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 15px;
-            padding: 25px;
-            border-top: 4px solid var(--primary);
+        /* Roles Detail */
+        .role-detail {
+            margin-top: 40px;
         }
 
-        .role-section h3 {
-            margin-bottom: 15px;
-            color: var(--text-main);
+        .person-card {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--card-border);
+        }
+
+        .person-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .member-name {
-            font-size: 0.8rem;
-            color: var(--primary-light);
-            background: rgba(99, 102, 241, 0.1);
-            padding: 4px 10px;
-            border-radius: 10px;
+        .name-role {
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Code Blocks */
-        pre {
-            background: #000;
-            padding: 20px;
-            border-radius: 15px;
-            overflow-x: auto;
-            border: 1px solid var(--primary);
-            margin: 15px 0;
+        .name {
+            font-weight: 700;
+            font-size: 1.1rem;
         }
 
-        code {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: #e2e8f0;
+        .role-tag {
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(34, 211, 238, 0.1);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 5px;
+            width: fit-content;
+            text-transform: uppercase;
         }
 
-        .cmd {
-            color: var(--success);
-        }
-
-        /* Logic Example */
-        .how-to {
-            border-left: 4px solid var(--success);
-            padding-left: 20px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            section {
-                padding: 40px 0;
-            }
-
-            .nav-links {
-                gap: 5px;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        ul {
+        /* List Styling */
+        ul.task-list {
             list-style: none;
         }
 
-        li {
-            margin-bottom: 10px;
-            padding-left: 20px;
+        ul.task-list li {
+            margin-bottom: 12px;
+            padding-left: 30px;
             position: relative;
             color: var(--text-dim);
         }
 
-        li::before {
-            content: "•";
-            color: var(--primary);
+        ul.task-list li::before {
+            content: "";
             position: absolute;
             left: 0;
-            font-weight: bold;
+            top: 12px;
+            width: 12px;
+            height: 1px;
+            background: var(--primary);
+        }
+
+        /* Code Block */
+        pre {
+            background: #000;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 30px;
+            }
+        }
+
+        /* Tabs/Accordion for roles could be better but sticking to clear structured cards */
+        .tech-badge {
+            font-size: 0.7rem;
+            background: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -230,152 +284,262 @@
 <body>
 
     <nav>
-        <div class="nav-links">
-            <a href="#intro">Introduction</a>
-            <a href="#structure">Structure</a>
-            <a href="#roles">Missions par Rôle</a>
-            <a href="#edit">Comment Modifier</a>
-            <a href="#git">Workflow Git</a>
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="nav-brand">G9 PLANNING</a>
+                <div class="nav-links">
+                    <a href="#architecture">Architecture</a>
+                    <a href="#logic">Logic</a>
+                    <a href="#missions">Missions Individuelles</a>
+                    <a href="#workflow">Workflow</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <div class="container">
-        <header id="intro">
-            <h1>Master Guide G9</h1>
-            <p class="subtitle">Organisation, Méthodologie et Excellence Technique</p>
+        <header>
+            <h1>Encyclopédie Technique</h1>
+            <p class="header-desc">Le guide définitif pour chaque rôle du Groupe G9. Comprenez votre mission, maîtrisez
+                l'architecture et produisez un code d'exception.</p>
         </header>
 
-        <!-- Project Structure -->
-        <section id="structure">
-            <h2>📂 Structure Sacrée du Projet</h2>
+        <!-- Deep Dive Architecture -->
+        <section id="architecture">
+            <span class="section-tag">Structure & Flux</span>
+            <h2>L'Architecture du Projet</h2>
+            <p class="subtitle" style="margin-bottom: 40px;">Notre projet est découpé en couches logiques pour que
+                personne ne se gène lors du développement.</p>
+
+            <div class="grid">
+                <!-- UI Layer -->
+                <div class="card">
+                    <span class="arch-title">1. Couche Présentation (View)</span>
+                    <p>C'est l'interface graphique. Elle ne connaît rien au SQL ni aux calculs complexes.</p>
+                    <ul class="task-list">
+                        <li>Utilise <strong>Java Swing</strong>.</li>
+                        <li>Écoute les boutons et affiche les données dans <code>JTable</code>.</li>
+                        <li>Lien : <code>com.g9.view</code></li>
+                    </ul>
+                </div>
+                <!-- Service Layer -->
+                <div class="card" style="border-color: var(--primary)">
+                    <span class="arch-title">2. Couche Service (Logic)</span>
+                    <p>C'est le cerveau ! Elle fait le pont entre l'UI et la Base de Données.</p>
+                    <ul class="task-list">
+                        <li><strong>CourseService</strong> : Centralise tout le CRUD.</li>
+                        <li><strong>ConflictService</strong> : Analyse les collisions temporelles.</li>
+                        <li>Lien : <code>com.g9.service</code></li>
+                    </ul>
+                </div>
+                <!-- Data Layer -->
+                <div class="card">
+                    <span class="arch-title">3. Couche Persistance (DAO)</span>
+                    <p>C'est l'interface avec MySQL. Elle ne contient que des requêtes SQL.</p>
+                    <ul class="task-list">
+                        <li>Utilise <strong>JDBC</strong> via un Singleton.</li>
+                        <li>Convertit les ResultSets SQL en objets Java `Planning`.</li>
+                        <li>Lien : <code>com.g9.dao</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box"
+                style="margin-top: 50px; background: var(--glass); padding: 30px; border-radius: 24px; border: 1px solid var(--primary);">
+                <h3 style="margin-bottom: 20px;">Le Cycle d'une Donnée</h3>
+                <p><strong>L'utilisateur clique</strong> sur "Ajouter" → <strong>La Vue</strong> crée un objet
+                    `Planning` → <strong>Le Service</strong> vérifie s'il y a conflit → <strong>Le DAO</strong> insère
+                    dans MySQL → <strong>La Vue</strong> rafraîchit le tableau.</p>
+            </div>
+        </section>
+
+        <!-- Individual Missions -->
+        <section id="missions">
+            <span class="section-tag">Responsabilités</span>
+            <h2>Missions Individuelles</h2>
+
+            <div class="role-grid">
+                <!-- LEADS -->
+                <div class="person-card" style="border-left: 4px solid var(--accent);">
+                    <div class="person-header">
+                        <div class="name-role">
+                            <span class="name">KOULAI FANTIO N. Favor</span>
+                            <span class="role-tag">Chef de Projet / Lead Dev</span>
+                        </div>
+                    </div>
+                    <ul class="task-list">
+                        <li><strong>Direction Technique</strong> : Définir les standards de nommage pour que Favor,
+                            Sokeng et Freddy parlent la même langue.</li>
+                        <li><strong>Merge Master</strong> : C'est toi qui fusionnes les branches sur GitHub. Vérifie
+                            toujours que le code compile avant de dire OK.</li>
+                    </ul>
+                </div>
+
+                <!-- BACKENDS -->
+                <div class="grid">
+                    <div class="person-card" style="border-top: 4px solid var(--primary);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">SINENG KENGNI Juvenal</span>
+                                <span class="role-tag">Développeur CRUD</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Cœur du Système</strong> : Ton but est que `CourseService` puisse ajouter,
+                                modifier et supprimer proprement.</li>
+                            <li><strong>Coordination SQL</strong> : Travaille avec Ryan Sokeng pour que tes objets Java
+                                correspondent à ses tables MySQL.</li>
+                        </ul>
+                    </div>
+                    <div class="person-card" style="border-top: 4px solid var(--primary);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">CHOUDJA TADZEWA Freddy</span>
+                                <span class="role-tag">Algorithmicien Conflits</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Cerveau IA</strong> : Ton algorithme est le plus important. Tu dois gérer les
+                                chevauchements de salles ET d'enseignants.</li>
+                            <li><strong>Performance</strong> : Optimise tes boucles de recherche pour que le logiciel ne
+                                rame pas avec 1000 cours.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- UI & DB -->
+                <div class="grid" style="margin-top: 30px;">
+                    <div class="person-card" style="border-top: 4px solid var(--danger);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">EYEBE GERMAINE Prisca</span>
+                                <span class="role-tag">Designer UI/UX</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Expérience Utilisateur</strong> : L'app doit être belle. Utilise des icônes et
+                                des couleurs claires (Rouge si conflit, Vert si ok).</li>
+                            <li><strong>Formulaires Dynamiques</strong> : Crée des champs qui se valident en temps réel.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="person-card" style="border-top: 4px solid var(--accent);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">SOKENG FANDO Frank Ryan</span>
+                                <span class="role-tag">Administrateur BD</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Base Solide</strong> : Crée les scripts SQL dans `resources/schema.sql`.</li>
+                            <li><strong>Relationnel</strong> : Assure-toi que les relations entre Cours, Profs et Salles
+                                sont logiques (clés étrangères).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- QA & DATA -->
+                <div class="grid" style="margin-top: 30px;">
+                    <div class="person-card">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">FONKOU DEFFO Ryan</span>
+                                <span class="role-tag">Testeur / QA</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Garde-Fou</strong> : Lance `mvn test` tous les jours. Si ça casse, c'est toi qui
+                                lances l'alerte !</li>
+                            <li><strong>Rapport de Bugs</strong> : Liste chaque crash ou erreur de logique dans un
+                                document partagé.</li>
+                        </ul>
+                    </div>
+                    <div class="person-card">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">APIEBENG KENYO Esther</span>
+                                <span class="role-tag">Analyste / Data</span>
+                            </div>
+                        </div>
+                        <ul class="task-list">
+                            <li><strong>Réalité</strong> : Prépare 10 cas de cours réels. Sans de bonnes données, on ne
+                                peut pas tester les conflits sérieusement.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DOCS -->
+                <div class="grid" style="margin-top: 30px;">
+                    <div class="person-card" style="border-top: 1px solid var(--text-dim);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">TCHOUTA HAPPI Claude</span>
+                                <span class="role-tag">Rédacteur Technique</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem;"><strong>Mission :</strong> Rédaction du rapport PDF final.
+                            Explique pourquoi nous avons choisi cette architecture.</p>
+                    </div>
+                    <div class="person-card" style="border-top: 1px solid var(--text-dim);">
+                        <div class="person-header">
+                            <div class="name-role">
+                                <span class="name">FEBNCHAK MFOUT Borelle</span>
+                                <span class="role-tag">Responsable Documentation</span>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.9rem;"><strong>Mission :</strong> Tenir à jour le README et le tableau
+                            des contributions. Personne ne doit être oublié !</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Standards -->
+        <section id="logic">
+            <span class="section-tag">Best Practices</span>
+            <h2>Comment coder sans faire d'erreurs ?</h2>
             <div class="card">
-                <p>Nous utilisons le pattern <strong>MVC</strong>. Chaque fichier a sa place précise.</p>
-                <div class="roles-grid">
-                    <div>
-                        <strong>📦 src/main/java/com/g9/model</strong>
-                        <p>Les objets (les "choses" que l'app gère). Ex: <code>Planning.java</code>.</p>
-                    </div>
-                    <div>
-                        <strong>📦 src/main/java/com/g9/service</strong>
-                        <p>Le cerveau. Calculs, algorithmes, enregistrement. Ex: <code>ConflictChecker.java</code>.</p>
-                    </div>
-                    <div>
-                        <strong>📦 src/main/java/com/g9/view</strong>
-                        <p>Tout ce qui est visuel (Boutons, Tableaux). Ex: <code>MainFrame.java</code>.</p>
-                    </div>
-                    <div>
-                        <strong>📦 src/main/resources</strong>
-                        <p>Images, sons et fichiers SQL de Sokeng.</p>
-                    </div>
+                <p>Respectez ces 3 lois fondamentales :</p>
+                <div class="arch-box">
+                    <span class="arch-title">Loi 1 : Pas d'Ad-Hoc</span>
+                    <p>N'écrivez pas du code "vite fait". Si vous avez besoin d'une couleur, définissez-la une fois pour
+                        toute. Si vous avez besoin d'une date, utilisez un format standard.</p>
+                </div>
+                <div class="arch-box" style="border-color: var(--success)">
+                    <span class="arch-title">Loi 2 : Un fichier = Une responsabilité</span>
+                    <p>Si vous modifiez l'interface, restez dans <code>com.g9.view</code>. Si vous modifiez un calcul,
+                        allez dans <code>com.g9.service</code>.</p>
+                </div>
+                <div class="arch-box" style="border-color: var(--warning)">
+                    <span class="arch-title">Loi 3 : Documentez en Anglais ou Français clair</span>
+                    <p>Java est en Anglais, mais nos commentaires peuvent être en Français. Soyez clairs.</p>
+                    <pre><code>/**
+ * Enregistre un cours s'il n'y a pas de conflit.
+ */
+public void add(Planning p) { ... }</code></pre>
                 </div>
             </div>
         </section>
 
-        <!-- Role Based Instructions -->
-        <section id="roles">
-            <h2>👥 Guide Technique par Rôle</h2>
-            <div class="roles-grid">
-                <!-- Favor -->
-                <div class="role-section">
-                    <h3>Favor (Lead) <span class="member-name">Architecture</span></h3>
-                    <ul>
-                        <li>Valider les Pull Requests sur GitHub.</li>
-                        <li>S'assurer que personne ne duplique le code.</li>
-                        <li>Utiliser <code>git merge</code> proprement.</li>
-                    </ul>
-                </div>
-                <!-- Ryan (BD) -->
-                <div class="role-section" style="border-top-color: var(--accent)">
-                    <h3>Frank Ryan (BD) <span class="member-name">SQL / JDBC</span></h3>
-                    <ul>
-                        <li>Écris tes scripts dans <code>resources/schema.sql</code>.</li>
-                        <li>Crée ton Singleton de connexion dans <code>com.g9.dao</code>.</li>
-                        <li>Assure-toi que les types SQL matchent avec les attributs Java (ex: VARCHAR -> String).</li>
-                    </ul>
-                </div>
-                <!-- Juvenal -->
-                <div class="role-section" style="border-top-color: var(--success)">
-                    <h3>Juvenal (CRUD) <span class="member-name">Backend Logic</span></h3>
-                    <ul>
-                        <li>Code la classe <code>CourseService.java</code>.</li>
-                        <li>Tes méthodes : <code>saveCourse()</code>, <code>update()</code>, <code>delete()</code>.</li>
-                        <li>Appelle l'algorithme de Freddy avant d'ajouter un cours.</li>
-                    </ul>
-                </div>
-                <!-- Freddy -->
-                <div class="role-section" style="border-top-color: var(--warning)">
-                    <h3>Freddy (Algorithme) <span class="member-name">Algorithmique</span></h3>
-                    <ul>
-                        <li>Code le moteur de détection dans <code>ConflictChecker.java</code>.</li>
-                        <li>Doit gérer les jours de la semaine (Lundi != Mardi).</li>
-                        <li>Ta méthode doit être <code>static</code> et retourner un <code>boolean</code>.</li>
-                    </ul>
-                </div>
-                <!-- Prisca -->
-                <div class="role-section" style="border-top-color: var(--danger)">
-                    <h3>Prisca (Designer) <span class="member-name">UI / Maquettes</span></h3>
-                    <ul>
-                        <li>Utilise <code>JPanel</code> pour séparer le formulaire du tableau.</li>
-                        <li>Utilise <code>GridBagLayout</code> pour que les boutons soient bien alignés.</li>
-                        <li>Ne mets pas de logique de calcul dans tes boutons (appelle <code>CourseService</code>).</li>
-                    </ul>
-                </div>
-                <!-- Ryan (QA) -->
-                <div class="role-section">
-                    <h3>Ryan (QA) <span class="member-name">Tests Unitaires</span></h3>
-                    <ul>
-                        <li>Crée des tests dans <code>src/test/java</code>.</li>
-                        <li>Teste les cas "limites" (ex: cours de minuit à 2h).</li>
-                        <li>Vérifie que <code>mvn clean install</code> ne donne aucune erreur.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- How to Edit Section -->
-        <section id="edit">
-            <h2>📝 Comment modifier le code proprement ?</h2>
-            <div class="card how-to">
-                <h3>Exemple : Ajouter un champ "Salle"</h3>
-                <p>Si tu dois changer quelque chose, suis ce flux :</p>
-                <ol style="margin-left: 20px;">
-                    <li><strong>Modifier le Modèle :</strong> Ajoute <code>private String salle;</code> dans
-                        <code>Planning.java</code>.</li>
-                    <li><strong>Générer Getters/Setters :</strong> Clic droit dans l'IDE -> Source -> Generate Getters
-                        and Setters.</li>
-                    <li><strong>Mettre à jour le Service :</strong> Si c'est une règle de conflit, modifie
-                        <code>ConflictChecker</code>.</li>
-                    <li><strong>Mettre à jour la Vue :</strong> Ajoute un <code>JTextField</code> pour que Prisca puisse
-                        le voir.</li>
+        <!-- Workflow -->
+        <section id="workflow">
+            <h2>🚀 Git Parfait en 60 secondes</h2>
+            <div class="card" style="background: #000;">
+                <p style="color: var(--accent); font-weight: 700;">Le cycle quotidien de l'équipe :</p>
+                <ol style="margin-top: 20px; color: var(--text-dim); padding-left: 20px;">
+                    <li><code>git checkout main</code></li>
+                    <li><code>git pull origin main</code> (Récupère le travail des autres)</li>
+                    <li><code>git checkout -b ma-tache</code> (Crée ta zone de travail)</li>
+                    <li>... Code Code Code ...</li>
+                    <li><code>git add .</code></li>
+                    <li><code>git commit -m "feat: j'ai fait ça"</code></li>
+                    <li><code>git push origin ma-tache</code></li>
                 </ol>
-                <div class="highlight-box">
-                    <p>⚠️ <strong>Conseil :</strong> Ne change jamais le nom d'une variable existante sans prévenir tes
-                        camarades via WhatsApp !</p>
-                </div>
             </div>
         </section>
 
-        <!-- Git Workflow -->
-        <section id="git">
-            <h2>🌿 Workflow Git Parfait</h2>
-            <div class="card">
-                <p>Pour éviter de casser le travail des autres :</p>
-                <pre><code><span class="cmd"># 1. Toujours revenir sur main et tirer les dernières modifs</span>
-git checkout main
-git pull origin main
-
-<span class="cmd"># 2. Créer sa branche de travail</span>
-git checkout -b ma-tache-specifique
-
-<span class="cmd"># 3. Envoyer son travail</span>
-git add .
-git commit -m "feat: [votre rôle] description du changement"
-git push origin ma-tache-specifique</code></pre>
-            </div>
-        </section>
-
-        <footer>
-            <p>Document Technique Officiel - Groupe G9 - Master de Projet TP207</p>
+        <footer style="padding: 60px 0; text-align: center; border-top: 1px solid var(--card-border);">
+            <p>Documentation Propulsée par le Groupe G9 | Excellence au TP207</p>
         </footer>
     </div>
 
