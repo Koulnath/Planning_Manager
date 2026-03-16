@@ -2,44 +2,66 @@ package com.g9.service;
 
 import com.g9.model.JourSemaine;
 import com.g9.model.Planning;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConflictCheckerTest {
 
-    @Test
-    public void testConflictMemeSalleMemeHeure() {
-        Planning p1 = new Planning("Java", "Nathanael", "Salle 1", JourSemaine.LUNDI, "08:00", "10:00");
-        Planning p2 = new Planning("SQL", "Sokeng", "Salle 1", JourSemaine.LUNDI, "09:00", "11:00");
-        assertTrue("Il devrait y avoir un conflit de salle (chevauchement)", ConflictChecker.hasConflict(p1, p2));
+    private List<Planning> coursExistants;
+
+    @Before
+    public void setUp() {
+        coursExistants = new ArrayList<>();
+        // On crée un cours de référence pour nos tests
+        // Juvenal enseigne en Salle 1, le Lundi de 08:00 à 10:00
+        coursExistants.add(new Planning("Java Core", "Juvenal", "Salle 1", JourSemaine.LUNDI, "08:00", "10:00"));
     }
 
     @Test
-    public void testConflictMemeProfMemeHeure() {
-        Planning p1 = new Planning("Java", "Juvenal", "Salle 1", JourSemaine.LUNDI, "08:00", "10:00");
-        Planning p2 = new Planning("PHP", "Juvenal", "Salle 2", JourSemaine.LUNDI, "09:00", "11:00");
-        assertTrue("Il devrait y avoir un conflit d'enseignant (même prof même heure)",
-                ConflictChecker.hasConflict(p1, p2));
+    public void testAucunConflitHeureDifferente() {
+        // Un cours le même jour, mais qui commence pile à la fin du premier (10:00)
+        Planning nouveauCours = new Planning("SQL", "Sokeng", "Salle 2", JourSemaine.LUNDI, "10:00", "12:00");
+        
+        // La méthode valider ne doit lever aucune exception
+        ConflictChecker.valider(nouveauCours, coursExistants);
     }
 
     @Test
-    public void testPasDeConflitJoursDifferents() {
-        Planning p1 = new Planning("Java", "Juvenal", "Salle 1", JourSemaine.LUNDI, "08:00", "10:00");
-        Planning p2 = new Planning("Java", "Juvenal", "Salle 1", JourSemaine.MARDI, "08:00", "10:00");
-        assertFalse("Pas de conflit car jours différents", ConflictChecker.hasConflict(p1, p2));
+    public void testAucunConflitJourDifferent() {
+        // Le même prof et la même salle, mais un jour différent (Mardi)
+        Planning nouveauCours = new Planning("Java Avancé", "Juvenal", "Salle 1", JourSemaine.MARDI, "08:00", "10:00");
+        
+        // La méthode valider ne doit lever aucune exception
+        ConflictChecker.valider(nouveauCours, coursExistants);
     }
 
-    @Test
-    public void testPasDeConflitHeuresQuiSeTouchent() {
-        Planning p1 = new Planning("Java", "Juvenal", "Salle 1", JourSemaine.LUNDI, "08:00", "10:00");
-        Planning p2 = new Planning("PHP", "Sokeng", "Salle 1", JourSemaine.LUNDI, "10:00", "12:00");
-        assertFalse("Pas de conflit car les heures se touchent exactement", ConflictChecker.hasConflict(p1, p2));
+    @Test(expected = IllegalArgumentException.class)
+    public void testConflitMemeProfesseur() {
+        // Juvenal tente de donner un autre cours le Lundi à 09:00 (chevauchement avec 08:00-10:00)
+        Planning nouveauCours = new Planning("Spring Boot", "Juvenal", "Salle 2", JourSemaine.LUNDI, "09:00", "11:00");
+        
+        // Doit déclencher une IllegalArgumentException
+        ConflictChecker.valider(nouveauCours, coursExistants);
     }
 
-    @Test
-    public void testConflitChevauchementTotal() {
-        Planning p1 = new Planning("Java", "Favor", "Salle A", JourSemaine.MERCREDI, "08:00", "12:00");
-        Planning p2 = new Planning("SQL", "Sokeng", "Salle A", JourSemaine.MERCREDI, "09:00", "11:00");
-        assertTrue("Conflit car le cours p2 est inclus dans p1", ConflictChecker.hasConflict(p1, p2));
+    @Test(expected = IllegalArgumentException.class)
+    public void testConflitMemeSalle() {
+        // Un autre prof tente d'utiliser la Salle 1 le Lundi à 08:30 (chevauchement avec 08:00-10:00)
+        Planning nouveauCours = new Planning("Maths", "Nathanael", "Salle 1", JourSemaine.LUNDI, "08:30", "10:30");
+        
+        // Doit déclencher une IllegalArgumentException
+        ConflictChecker.valider(nouveauCours, coursExistants);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConflitInclusionTotale() {
+        // Un cours qui se déroule entièrement pendant le cours existant (08:30 - 09:30)
+        Planning nouveauCours = new Planning("Mini-Séminaire", "Favor", "Salle 1", JourSemaine.LUNDI, "08:30", "09:30");
+        
+        // Doit déclencher une IllegalArgumentException
+        ConflictChecker.valider(nouveauCours, coursExistants);
     }
 }

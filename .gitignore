@@ -1,0 +1,13 @@
+# Fichiers de compilation Java
+target/
+*.class
+
+# Fichiers VS Code
+.vscode/
+.settings/
+.project/
+.classpath/
+
+# Fichiers système
+.DS_Store
+Thumbs.db

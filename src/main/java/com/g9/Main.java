@@ -19,7 +19,7 @@ public class Main {
         boolean continuer = true;
         while (continuer) {
             afficherMenu();
-            String choix = scanner.nextLine();
+            String choix = scanner.nextLine().trim();
 
             switch (choix) {
                 case "1":
@@ -35,10 +35,10 @@ public class Main {
                     continuer = false;
                     break;
                 default:
-                    System.out.println("Choix invalide.");
+                    System.out.println("Choix invalide. Veuillez réessayer.");
             }
         }
-        System.out.println("Au revoir !");
+        System.out.println("Au revoir et bonne présentation !");
     }
 
     private static void initialiserDonnees() {
@@ -47,7 +47,7 @@ public class Main {
             service.addCourse(new Planning("SQL DB", "Sokeng", "Salle 102", JourSemaine.LUNDI, "10:00", "12:00"));
             service.addCourse(new Planning("Maths", "Nathanael", "Amphi B", JourSemaine.MARDI, "08:00", "10:30"));
         } catch (Exception e) {
-            System.err.println("Erreur initialisation : " + e.getMessage());
+            System.err.println("Erreur lors de l'initialisation des données de test : " + e.getMessage());
         }
     }
 
@@ -61,9 +61,13 @@ public class Main {
     }
 
     private static void voirListe() {
-        System.out.println("\n📋 LISTE DES COURS :");
-        for (Planning p : service.getAllCourses()) {
-            System.out.println(p);
+        System.out.println("\n--- LISTE DES COURS ---");
+        if (service.getAllCourses().isEmpty()) {
+            System.out.println("Aucun cours n'est actuellement programmé.");
+        } else {
+            for (Planning p : service.getAllCourses()) {
+                System.out.println(p.toString());
+            }
         }
     }
 
@@ -71,37 +75,54 @@ public class Main {
         System.out.println("\n--- AJOUT D'UN COURS ---");
         try {
             System.out.print("Nom du cours : ");
-            String nom = scanner.nextLine();
+            String nom = scanner.nextLine().trim();
+            
             System.out.print("Enseignant : ");
-            String prof = scanner.nextLine();
+            String prof = scanner.nextLine().trim();
+            
             System.out.print("Salle : ");
-            String salle = scanner.nextLine();
+            String salle = scanner.nextLine().trim();
+            
             System.out.print("Jour (ex: LUNDI) : ");
-            String jourStr = scanner.nextLine().toUpperCase();
+            String jourStr = scanner.nextLine().trim().toUpperCase();
+            
+            JourSemaine jour;
+            try {
+                jour = JourSemaine.valueOf(jourStr);
+            } catch (IllegalArgumentException e) {
+                System.err.println("Jour invalide. Veuillez utiliser Lundi, Mardi, etc.");
+                return; 
+            }
+            
             System.out.print("Début (HH:mm) : ");
-            String debut = scanner.nextLine();
+            String debut = scanner.nextLine().trim();
+            
             System.out.print("Fin (HH:mm) : ");
-            String fin = scanner.nextLine();
+            String fin = scanner.nextLine().trim();
 
-            Planning p = new Planning(nom, prof, salle, JourSemaine.valueOf(jourStr), debut, fin);
+            Planning p = new Planning(nom, prof, salle, jour, debut, fin);
             service.addCourse(p);
-            System.out.println("✅ Cours ajouté avec succès !");
+            System.out.println("Cours ajouté avec succès !");
+            
         } catch (Exception e) {
-            System.err.println("❌ " + e.getMessage());
+            System.err.println("Erreur inattendue : " + e.getMessage());
         }
     }
 
     private static void supprimerCours() {
         System.out.print("\nID du cours à supprimer : ");
         try {
-            int id = Integer.parseInt(scanner.nextLine());
+            int id = Integer.parseInt(scanner.nextLine().trim());
+            
             if (service.deleteCourse(id)) {
-                System.out.println("✅ Cours supprimé.");
+                System.out.println("Cours supprimé.");
             } else {
-                System.out.println("⚠️ ID non trouvé.");
+                System.out.println("ID non trouvé. Aucun cours n'a été supprimé.");
             }
+        } catch (NumberFormatException e) {
+            System.err.println("ID invalide. Veuillez entrer un nombre entier.");
         } catch (Exception e) {
-            System.err.println("❌ ID invalide.");
+            System.err.println("Erreur lors de la suppression.");
         }
     }
 }
