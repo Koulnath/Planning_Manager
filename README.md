@@ -1,6 +1,4 @@
-Voici le code complet et final pour ton fichier **`README.md`**. J'ai inclus les badges, la structure visuelle et les sections techniques pour que ton dépôt GitHub soit au top pour la soutenance.
 
-Copie tout le bloc ci-dessous :
 
 ```markdown
 # Planning Manager - Groupe G9
