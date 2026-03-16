@@ -1,52 +1,103 @@
-# Planning_Manager - Système de Gestion d'Emplois du Temps
+Voici le code complet et final pour ton fichier **`README.md`**. J'ai inclus les badges, la structure visuelle et les sections techniques pour que ton dépôt GitHub soit au top pour la soutenance.
 
-Bienvenue sur le projet du Groupe G9 ! Ce logiciel permet de gérer les emplois du temps, d'ajouter des cours et de vérifier les conflits de salles et d'horaires.
+Copie tout le bloc ci-dessous :
 
-## 📋 Prérequis
-Avant de commencer, assurez-vous d'avoir installé :
-- **Java JDK 17** ou supérieur.
-- **Maven 3.6+**.
+```markdown
+# Planning Manager - Groupe G9
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![Swing](https://img.shields.io/badge/UI-Swing/FlatLaf-blue?style=for-the-badge)
+
+> **Planning Manager** est une solution robuste de gestion d'emplois du temps universitaire. Elle permet de planifier des cours en temps réel tout en garantissant l'absence de conflits logistiques grâce à un algorithme de détection intelligent.
+
+---
+
+## Fonctionnalités Clés
+- **Interface Moderne** : UI épurée avec support du **Dark Mode** et **Light Mode** (FlatLaf).
+- **Gestion des Conflits** : Vérification automatique de la disponibilité des salles et des professeurs.
+- **Dashboard Intuitif** : Visualisation claire des cours avec un tableau dynamique.
+- **Persistance des Données** : Intégration complète avec MySQL via JDBC.
+
+---
+
+## Architecture du Projet (MVC)
+Le projet respecte le pattern **Modèle-Vue-Contrôleur** pour une séparation claire des responsabilités :
+
+* **`com.g9.model`** : Représentation des données (Planning, JourSemaine).
+* **`com.g9.view`** : Interface utilisateur (MainGUI) avec composants personnalisés.
+* **`com.g9.service`** : Logique métier et algorithme de détection de conflits.
+* **`com.g9.dao`** : Couche d'accès à la base de données (Data Access Object).
+
+---
+
+## Installation & Lancement
+
+### 1. Prérequis
+- **JDK 17** ou supérieur.
 - **MySQL / XAMPP**.
-- Un IDE comme **VS Code** ou **IntelliJ**.
+- **Maven 3.6+**.
 
-## 🚀 Installation & Lancement
-1.  **Cloner le projet** :
-    ```bash
-    git clone https://github.com/koulnath/Planning_Manager.git
-    cd Planning_Manager
-    ```
-2.  **Configurer la Base de Données** :
-    - Lancez XAMPP (Apache & MySQL).
-    - Créez une base de données nommée `tp207`.
-    - Importez le fichier `src/main/resources/schema.sql` (ou utilisez le script fourni dans le `guide_equipe.md`).
-3.  **Compiler et Lancer** :
-    ```bash
-    mvn clean compile
-    mvn exec:java -Dexec.mainClass="com.g9.Main"
-    ```
+### 2. Configuration de la Base de Données
+1. Démarrez votre serveur MySQL (via XAMPP par exemple).
+2. Créez une base de données nommée `tp207`.
+3. Importez le script SQL de structure :
+   ```sql
+   -- Localisation : src/main/resources/schema.sql
+   CREATE DATABASE tp207;
+   USE tp207;
 
-## 🛠️ Structure du Projet (MVC)
-- `com.g9.model` : Contient les objets de données (`Planning.java`).
-- `com.g9.view` : Interfaces graphiques Swing (Prisca).
-- `com.g9.service` : Logique métier comme la détection de conflits (skjuve & Freddy).
-- `com.g9.dao` : Accès à la base de données (Sokeng).
+```
 
-## 🌿 Travail en Équipe (Règles Git)
-- **Branche** : Ne travaillez jamais sur `main`. Créez votre branche : `git checkout -b votre-nom-tache`.
-- **Commit** : Faites des messages clairs.
-- **Push** : Envoyez votre travail avec `git push origin votre-nom-tache`.
+### 3. Compilation et Exécution
 
-## 📖 Documentation Détaillée
-- [✨ Guide Fondamental du Groupe G9 (HTML)](documentation/guide.html) : **À lire absolument !** (Architecture, Rôles, Git).
-- [🛠️ Guide d'Intégration Backend](INTEGRATION_GUIDE.md) : Pour Prisca (UI), Sokeng (DB) et Ryan (QA).
-- [Guide Technique du Développeur](DEVELOPER_GUIDE.md) : Détails techniques profonds.
-- [Guide de Contribution](CONTRIBUTING.md) : Pour le travail en binôme.
+Ouvrez votre terminal à la racine du projet :
 
-## ✅ Tests
-Pour vérifier que la logique de conflit fonctionne :
 ```bash
-mvn test
+# Télécharger les dépendances et compiler
+mvn clean install
+
+# Lancer l'application
+mvn exec:java -Dexec.mainClass="com.g9.MainGUI"
+
 ```
 
 ---
-*Projet réalisé dans le cadre du TP207 par le Groupe G9.*
+
+## Travail en Équipe (Workflow Git)
+
+Pour maintenir la stabilité du code, l'équipe G9 suit ces règles :
+
+* **Branches** : `main` est réservée aux versions stables. Travail sur branches `feature/nom`.
+* **Commits** : Messages explicites (ex: `feat: integration flatlaf`).
+* **Review** : Validation avant fusion sur la branche principale.
+
+---
+
+## L'Équipe G9
+
+* **Design UI/UX** : Prisca
+* **Logique & Algorithme** : skjuve & Freddy
+* **Database & DAO** : Sokeng
+* **Qualité & Tests** : Ryan
+
+---
+
+## Tests
+
+Exécutez les tests unitaires pour valider la logique de détection de conflits :
+
+```bash
+mvn test
+
+```
+
+---
+
+**Projet réalisé dans le cadre du TP207 par le Groupe G9.**
+
+```
+
+
+```
